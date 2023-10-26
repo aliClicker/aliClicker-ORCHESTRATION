@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  vuejs:
+    build:
+      context: ../aliClicker-FRONT
+      dockerfile: Dockerfile
+    container_name: aliClicker-FRONT
+    ports:
+      - "${VUEJS_PORT}:90"
+    volumes:
+      - ../aliClicker-FRONT:/app
+      - /app/node_modules
+
+  symfony:
+    build:
+      context: ../aliClicker-API
+      dockerfile: Dockerfile
+    container_name: aliClicker-API
+    ports:
+      - "${SYMFONY_PORT}:80"
+    volumes:
+      - ../aliClicker-API:/var/www/html
+      - /var/www/html/vendor
